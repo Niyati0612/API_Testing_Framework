@@ -1,7 +1,5 @@
 import requests
 import json
-import pytest
-
 class APIClient:
     def __init__(self, url, auth_token=None):
         self.url = url
@@ -33,59 +31,116 @@ class APIClient:
     def delete(self, endpoint):
         return self._make_request('delete', endpoint)
 
-# class TestApiOperations:
-#     OBJECT_ID = None
+
+# import requests, pytest
+# import logging
+# from endpoints import end_point_request
+# logger = logging.getLogger()
 #
-#     @pytest.fixture
-#     def api_client(self, base_url):
-#         return APIClient(url=base_url)
+# # e_response = {"key": "value"}
+# @pytest.mark.post
+# def post(base_url, endpoint, data, key):
+#     try:
+#         global e_response
+#         response_post = requests.post(f'{base_url}{endpoint}', json=data)
+#         e_response = response_post.json()
+#         print("\n\nPOST request successful.\nResponse:", e_response)
+#         print("Print ID:", end_point_request(data, key, e_response))
+#         return e_response
 #
-#     @pytest.fixture
-#     def data_objects(self, object_type):
-#         with open(f'../resources/data_{object_type}.json', 'r') as file:
-#             data_post = json.load(file)
-#         with open(f'../resources/put_{object_type}.json', 'r') as file:
-#             data_put = json.load(file)
-#         return data_post, data_put
+#     except requests.exceptions.RequestException as e:
+#         # raise Exception (f"\nPOST request failed. Error: {e}")
+#         logger.error(f"\n\nPOST request failed. Error: {e}")
+#         return False
 #
-#     @pytest.fixture
-#     def post_fixture(self, api_client, data_objects, request, object_type):
-#         data_post, data_put = data_objects
-#         if TestApiOperations.OBJECT_ID is None:
-#             response = api_client.post(f"/{object_type}", data_post)
-#             TestApiOperations.OBJECT_ID = response.json().get("id")
-#         yield TestApiOperations.OBJECT_ID
+# @pytest.mark.get
+# def get(base_url, endpoint, data, key):
+#     try:
+#         global e_response
+#         response = requests.get(f'{base_url}{endpoint}{end_point_request(data, key, e_response)}', json=data)
+#         response.raise_for_status()
+#         print("\n\nGET request successful.\nResponse:", response.json())
+#         return response
 #
-#     def test_get_object(self, api_client, post_fixture, object_type):
-#         OBJECT_ID = post_fixture
-#         api_client.get(f"/{object_type}/{OBJECT_ID}")
+#     except requests.exceptions.RequestException as e:
+#         logger.error(f"\n\nGET request failed. Error: {e}")
+#         return False
 #
-#     def test_put_object(self, api_client, post_fixture, data_objects, object_type):
-#         OBJECT_ID = post_fixture
-#         data_post, data_put = data_objects
-#         assert data_put['name'] == 'cat'
-#         if all(data_post[key] == data_put[key] for key in data_post):
-#             api_client.put(f"/{object_type}/{OBJECT_ID}", data_put)
-#         else:
-#             for key in data_post:
-#                 if data_post[key] != data_put[key]:
-#                     print(f"{key} is not equal to {data_post[key]}")
+# @pytest.mark.put
+# def put(base_url, endpoint, data, udata):
+#     try:
+#         response = requests.put(f'{base_url}{endpoint}', json=udata)
+#         response.raise_for_status()
+#         print("\n\nPUT request successful.\nResponse:", response.json())
+#         for key in data:
+#             if data[key] != udata[key]:
+#                 print(f"{key} FAIL {data[key]}")
+#             else:
+#                 print(f"{key} PASS {data[key]}")
+#                 # sys.exit()
+#         return response
 #
-#     def test_delete_object(self, api_client, post_fixture, object_type):
-#         OBJECT_ID = post_fixture
-#         api_client.delete(f'/{object_type}/{OBJECT_ID}')
-
-
-
-
-
-
-
-
-
-
-
-
+#     except requests.exceptions.RequestException as e:
+#         logger.error(f"\n\nPUT request failed. Error: {e}")
+#         return False
+#
+# @pytest.mark.put_specification
+# def put_with_specification(base_url, endpoint, data, udata, key):
+#     try:
+#         global e_response
+#         print(e_response)
+#         response = requests.put(f'{base_url}{endpoint}{end_point_request(data, key, e_response)}', json=udata)
+#         print("\n\nPUT request successful.\nResponse:", response.json())
+#         for key in data:
+#             if data[key] != udata[key]:
+#                 print(f"{key} FAIL {data[key]}")
+#             else:
+#                 print(f"{key} PASS {data[key]}")
+#                 # sys.exit()
+#         return response
+#
+#     except requests.exceptions.RequestException as e:
+#         logger.error(f"\n\nPUT request failed. Error: {e}")
+#         return False
+#
+# @pytest.mark.delete
+# def delete(base_url, endpoint, data, key):
+#     try:
+#         response = requests.delete(f'{base_url}{endpoint}{end_point_request(data, key, e_response)}', json=data)
+#         print("\n\nDELETE request successful.\nResponse:", response.json())
+#         response.raise_for_status()
+#         return response
+#
+#     except requests.exceptions.RequestException as e:
+#         logger.error(f"\n\nDELETE request failed. Error: {e}")
+#         return False
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 
 
 # class APIClient:
