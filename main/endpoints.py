@@ -1,5 +1,4 @@
 class UsersEndpoints:
-    USER_ID = None
     GET_USER = "v2/user/"
     CREATE_USER = "v2/user/"
     UPDATE_USER = "v2/user/"
@@ -7,7 +6,6 @@ class UsersEndpoints:
 
 
 class PetEndpoints:
-    PET_ID = None
     GET_PET = "v2/pet/"
     CREATE_PET = "v2/pet/"
     UPDATE_PET = "v2/pet"
@@ -15,7 +13,6 @@ class PetEndpoints:
 
 
 class StoreEndpoints:
-    STORE_ID = None
     GET_STORE = "v2/store/order/"
     CREATE_STORE = "v2/store/order/"
     GET_INVENTORY = "v2/store/inventory/"

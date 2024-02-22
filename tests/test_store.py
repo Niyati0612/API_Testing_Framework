@@ -1,5 +1,5 @@
 import pytest
-from main.api_client import APIClient
+from tests.api_client import APIClient
 from main.endpoints import StoreEndpoints
 import json
 from main.conftest import base_url
@@ -12,7 +12,7 @@ class TestStoreOperations:
 
     @pytest.fixture
     def data_store(self):
-        with open('../resources\\data_store.json', 'r') as file:
+        with open('../main/Data/data_store.json', 'r') as file:
             data_post = json.load(file)
         return data_post
 
@@ -20,7 +20,7 @@ class TestStoreOperations:
     def post_fixture(self, api_client, data_store):
         data_post= data_store
         if TestStoreOperations.STORE_ID is None:
-            response = api_client.post(f'{StoreEndpoints.CREATE_STORE}', data_post)
+            response = api_client.post(f'{StoreEndpoints.CREATE_STORE}', data_post,files=None)
             TestStoreOperations.STORE_ID= response.json().get("id")
         yield TestStoreOperations.STORE_ID
 
@@ -36,4 +36,3 @@ class TestStoreOperations:
     def test_delete_store(self, api_client, post_fixture):
         STORE_ID = post_fixture
         api_client.delete(f'{StoreEndpoints.DELETE_STORE}{STORE_ID}')
-

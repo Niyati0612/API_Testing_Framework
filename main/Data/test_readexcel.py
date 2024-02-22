@@ -1,13 +1,12 @@
 import openpyxl
 import pytest
-import pytest
 
 
 @pytest.fixture
 def readData():
     global id
     list = []
-    path = "../resources/convert1.xlsx"
+    path = "convert1.xlsx"
     workbook = openpyxl.load_workbook(path)
     sheet = workbook.get_sheet_by_name("Sheet1")
     row = sheet.max_row
